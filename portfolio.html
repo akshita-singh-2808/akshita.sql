@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akshita Singh — Data Analyst Portfolio</title>
+<!--
+  HOW TO EDIT THIS FILE
+  ----------------------
+  1. This is now filled in with Akshita Singh's real info from her resume
+     (education, projects, skills, achievements, contact links). Only one
+     placeholder is left: [Link to your resume PDF once hosted online] in two
+     spots (hero button + footer) — once you upload your resume PDF somewhere
+     public (e.g. GitHub, Google Drive with link sharing on), paste that URL in.
+  2. The SQL PRACTICE TRACKER near the "sql_practice" section is a real working
+     widget — click "Edit counts" to type in your current solved counts from
+     LeetCode, DataLemur, HackerRank and StrataScratch. It saves automatically
+     in the browser so the numbers persist next time this browser opens the page.
+  3. Host this file for free on GitHub Pages, Netlify, or Vercel — just upload it
+     as index.html.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F17;
+    --panel:#121927;
+    --panel-alt:#182136;
+    --border:#26324A;
+    --text:#E7ECF3;
+    --muted:#8A96AC;
+    --amber:#F2B84B;
+    --teal:#4FD1C5;
+    --rose:#F2617A;
+    --radius:10px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--amber); color:#0B0F17;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .kw{color:var(--amber);}
+  .fn{color:var(--teal);}
+  .str{color:#C3E88D;}
+  .cm{color:var(--muted);}
+  a{color:var(--teal); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,15,23,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:920px; margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:17px;}
+  .logo span{color:var(--amber);}
+  nav.links{display:flex; gap:22px; font-family:'JetBrains Mono', monospace; font-size:13px;}
+  nav.links a{color:var(--muted);}
+  nav.links a:hover{color:var(--text); text-decoration:none;}
+  .nav-toggle{display:none; background:none; border:1px solid var(--border); color:var(--text); border-radius:8px; padding:6px 10px; font-family:'JetBrains Mono',monospace; font-size:12px;}
+
+  /* HERO */
+  .hero{padding:88px 0 64px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted);
+    letter-spacing:0.06em; margin-bottom:18px;
+  }
+  .query-block{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px 24px; font-family:'JetBrains Mono', monospace; font-size:14px;
+    overflow-x:auto; box-shadow:0 20px 50px -30px rgba(0,0,0,0.7);
+  }
+  .query-block .line{white-space:pre; }
+  .cursor{display:inline-block; width:8px; height:16px; background:var(--amber); vertical-align:-2px; animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .result-table{
+    margin-top:18px; width:100%; border-collapse:collapse; font-size:13px;
+  }
+  .result-table th{
+    text-align:left; font-family:'JetBrains Mono', monospace; font-weight:500;
+    color:var(--muted); padding:8px 12px; border-bottom:1px solid var(--border);
+    font-size:11px; letter-spacing:0.05em; text-transform:uppercase;
+  }
+  .result-table td{padding:12px; border-bottom:1px solid var(--border); vertical-align:top;}
+  .result-table tr:last-child td{border-bottom:none;}
+
+  .hero-name{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:20px;}
+  .hero-role{color:var(--teal); font-size:13px; font-family:'JetBrains Mono',monospace;}
+  .hero-tag{color:var(--muted); font-size:13.5px; max-width:360px;}
+
+  .hero-links{margin-top:22px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; padding:9px 16px;
+    border-radius:8px; border:1px solid var(--border); color:var(--text);
+    display:inline-flex; align-items:center; gap:6px; transition:border-color .15s, transform .15s;
+  }
+  .btn:hover{border-color:var(--teal); text-decoration:none; transform:translateY(-1px);}
+  .btn.primary{background:var(--amber); color:#0B0F17; border-color:var(--amber); font-weight:600;}
+  .btn.primary:hover{border-color:var(--amber); opacity:0.92;}
+
+  /* SECTION SHELL */
+  section{padding:56px 0;}
+  section.divider-top{border-top:1px solid var(--border);}
+  .sec-head{margin-bottom:30px;}
+  .sec-head .eyebrow{margin-bottom:8px;}
+  .sec-head h2{font-family:'Space Grotesk', sans-serif; font-size:24px; font-weight:600;}
+
+  /* SKILLS */
+  .skill-groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
+  .skill-card{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px;}
+  .skill-card h3{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--amber); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:12px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{
+    font-family:'JetBrains Mono', monospace; font-size:12px; padding:5px 10px;
+    background:var(--panel-alt); border:1px solid var(--border); border-radius:6px; color:var(--text);
+  }
+
+  /* PROJECTS */
+  .project{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px 24px; margin-bottom:18px;
+  }
+  .project-top{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:8px;}
+  .project h3{font-family:'Space Grotesk', sans-serif; font-size:17px; font-weight:600;}
+  .project .plinks{font-family:'JetBrains Mono', monospace; font-size:12px; display:flex; gap:14px;}
+  .project p{color:var(--muted); font-size:14px; margin-bottom:12px;}
+  .project .pill-row{margin-top:4px;}
+
+  /* TRACKER */
+  .tracker-panel{
+    background:linear-gradient(165deg, var(--panel), var(--panel-alt));
+    border:1px solid var(--border); border-radius:var(--radius); padding:26px 26px 22px;
+  }
+  .tracker-head{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:22px;}
+  .tracker-total{font-family:'Space Grotesk', sans-serif;}
+  .tracker-total .num{font-size:40px; font-weight:700; color:var(--amber); line-height:1;}
+  .tracker-total .lbl{font-size:12px; color:var(--muted); font-family:'JetBrains Mono', monospace; margin-top:4px;}
+  .tracker-edit-btn{
+    font-family:'JetBrains Mono', monospace; font-size:12px; padding:8px 14px;
+    border-radius:8px; border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer;
+  }
+  .tracker-edit-btn:hover{border-color:var(--teal);}
+  .platform-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
+  .platform-card{
+    background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:8px; padding:14px 16px;
+  }
+  .platform-card .p-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+  .platform-card .p-name{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--muted);}
+  .platform-card .p-count{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px;}
+  .platform-card input{
+    width:100%; background:var(--panel-alt); border:1px solid var(--border); border-radius:6px;
+    color:var(--text); font-family:'JetBrains Mono', monospace; font-size:16px; padding:8px 10px;
+  }
+  .bar-track{height:6px; background:var(--panel-alt); border-radius:4px; overflow:hidden; margin-top:10px;}
+  .bar-fill{height:100%; background:var(--teal); border-radius:4px; transition:width .4s ease;}
+  .tracker-note{margin-top:18px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono', monospace;}
+  .save-toast{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--teal);
+    opacity:0; transition:opacity .3s; margin-left:10px;
+  }
+  .save-toast.show{opacity:1;}
+
+  /* EDUCATION */
+  .edu-row{display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-bottom:1px solid var(--border); flex-wrap:wrap;}
+  .edu-row:last-child{border-bottom:none;}
+  .edu-row h3{font-family:'Space Grotesk', sans-serif; font-size:15.5px; font-weight:600;}
+  .edu-row .sub{color:var(--muted); font-size:13px;}
+  .edu-row .when{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--teal); white-space:nowrap;}
+
+  /* FOOTER */
+  footer{padding:50px 0 70px; text-align:center;}
+  footer .cm{display:block; margin-bottom:14px;}
+  footer .foot-links{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; font-family:'JetBrains Mono', monospace; font-size:13px;}
+
+  @media (max-width:640px){
+    nav.links{display:none;}
+    .nav-toggle{display:inline-block;}
+    .hero{padding:60px 0 44px;}
+    .result-table{display:block; overflow-x:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo">Akshita<span>.</span>sql</div>
+    <nav class="links">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#practice">sql_practice</a>
+      <a href="#education">education</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="query-block">
+      <div class="line"><span class="kw">SELECT</span> * <span class="kw">FROM</span> <span class="fn">candidates</span> <span class="kw">WHERE</span> role <span class="kw">IN</span> (<span class="str">'Data Analyst'</span>, <span class="str">'Data Scientist'</span>, <span class="str">'Business Analyst'</span>) <span class="kw">AND</span> name = <span class="str">'Akshita Singh'</span>;<span class="cursor"></span></div>
+      <table class="result-table">
+        <thead>
+          <tr><th>name</th><th>role</th><th>summary</th><th>status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="hero-name">Akshita Singh</td>
+            <td class="hero-role mono">Data Analyst / Data Scientist</td>
+            <td class="hero-tag">B.Tech. student at NIT Allahabad who builds end-to-end ML pipelines — from raw retail and customer data to deployed Streamlit dashboards. Strong in SQL, Python and predictive modelling, with a growing daily SQL practice habit.</td>
+            <td class="mono" style="color:var(--teal)">open_to_work</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hero-links">
+      <a class="btn primary" href="mailto:akshita.singh1965@email.com">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/akshita-singh2808/">LinkedIn</a>
+      <a class="btn" href="https://github.com/akshita-singh-2808">GitHub</a>
+      <a class="btn" href="https://drive.google.com/file/d/1ZVyDt_XdLDtzDbiqy0qOFR7NbI_BCMlc/view?usp=sharing">Resume ↓</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="divider-top">
+    <div class="sec-head">
+      <div class="eyebrow cm">-- about</div>
+      <h2>Who I am</h2>
+    </div>
+    <p style="max-width:640px; color:var(--muted); font-size:15px;">
+      Data is only valuable when it leads to better decisions. I enjoy exploring data, developing predictive models, and creating analytical solutions that bridge technical methods with business objectives. I'm currently building expertise in machine learning, deep learning, and business analytics while working on projects that demonstrate practical impact.
+
+    </p>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="divider-top">
+    <div class="sec-head">
+      <div class="eyebrow cm">-- SELECT * FROM skills</div>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-card">
+        <h3>Languages</h3>
+        <div class="pill-row">
+          <span class="pill">Python</span>
+          <span class="pill">SQL</span>
+          <span class="pill">C++</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Machine Learning</h3>
+        <div class="pill-row">
+          <span class="pill">Supervised / Unsupervised Learning</span>
+          <span class="pill">Deep Learning</span>
+          <span class="pill">Feature Engineering</span>
+          <span class="pill">Time-Series Forecasting</span>
+          <span class="pill">NLP (basics)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Libraries &amp; Frameworks</h3>
+        <div class="pill-row">
+          <span class="pill">Scikit-learn</span>
+          <span class="pill">TensorFlow / Keras</span>
+          <span class="pill">XGBoost</span>
+          <span class="pill">Pandas / NumPy</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Analytics &amp; Visualisation</h3>
+        <div class="pill-row">
+          <span class="pill">Power BI</span>
+          <span class="pill">Tableau</span>
+          <span class="pill">Excel</span>
+          <span class="pill">Matplotlib / Seaborn</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="divider-top">
+    <div class="sec-head">
+      <div class="eyebrow cm">-- SELECT * FROM projects ORDER BY relevance DESC</div>
+      <h2>Projects</h2>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>Rossmann Store Sales Forecasting — LSTM &amp; XGBoost</h3>
+        <div class="plinks"><a href="https://github.com/akshita-singh-2808/Rossmann-Store-Sales">code</a><a href="https://rossmann-store-sales.streamlit.app/">live</a></div>
+      </div>
+      <p>Built an end-to-end retail sales forecasting pipeline on 1.01M rows of historical data from
+      1,115 Rossmann stores, comparing LSTM and XGBoost on identical feature sets. Engineered lag
+      features, rolling statistics, promotions and holiday variables per-store to eliminate
+      cross-store data leakage. Tuned XGBoost achieved <strong>MAE 570, RMSE 799, R² 0.928</strong>,
+      while the LSTM hit <strong>12.27% MAPE</strong> — a 66.4% improvement over the naive baseline.
+      Deployed as an interactive Streamlit dashboard with store-level forecast simulation, a promo
+      toggle, and model comparison across all 1,115 stores.</p>
+      <div class="pill-row">
+        <span class="pill">Python</span><span class="pill">XGBoost</span><span class="pill">LSTM</span><span class="pill">Streamlit</span>
+      </div>
+    </div>
+    <div class="project">
+      <div class="project-top">
+        <h3>Airline Loyalty Churn Prediction &amp; Retention Intelligence</h3>
+        <div class="plinks"><a href="https://github.com/akshita-singh-2808/airlines_churn_prediction">code</a></div>
+      </div>
+      <p>Built an XGBoost-based churn prediction and segmentation system on airline loyalty data
+      covering 16,737 customer records. Engineered features from recency, flight frequency,
+      redemption ratio and seasonal engagement trends, achieving <strong>97% classification
+      accuracy</strong> and a <strong>0.97 ROC-AUC</strong> on imbalanced data through threshold
+      tuning. Added KMeans clustering for customer segmentation and shipped an interactive
+      Streamlit dashboard for churn analysis and retention strategy reporting.</p>
+      <div class="pill-row">
+        <span class="pill">Python</span><span class="pill">XGBoost</span><span class="pill">KMeans</span><span class="pill">Streamlit</span>
+      </div>
+    </div>
+    <div class="project">
+      <div class="project-top">
+        <h3>Customer Segmentation &amp; Marketing Analytics </h3>
+        <div class="plinks"><a href="https://github.com/akshita-singh-2808/customer_segmentation">code</a><a href="https://customersegmentation00.streamlit.app/">live</a></div>
+      </div>
+      <p>Segmented 2,200+ customers into four behavioral groups using K-means clustering on engineered demographic and spending features, then built an interactive Streamlit dashboard translating cluster insights into targeted marketing recommendations..</p>
+      <div class="pill-row">
+        <span class="pill">Python</span><span class="pill">PCA</span><span class="pill">StandardScaler</span><span class="pill">KMeans</span><span class="pill">Streamlit</span>
+      </div>
+    </div>
+        <div class="project">
+      <div class="project-top">
+        <h3>Retail Sales Dashboard (Microsoft Excel)</h3>
+        <div class="plinks"><a href="https://github.com/akshita-singh-2808/vistara_store_sales_analysis">code</a><a href="https://1drv.ms/x/c/ca8f799fd862bf37/IQDljFyC8ykfQKjq-weMdUTMAY12SoDhK0eKVlhXZzMtddA?e=agoMtB">live</a></div>
+      </div>
+      <p>Built an interactive Excel dashboard to analyze retail sales performance using Pivot Tables, Pivot Charts, and Slicers. The dashboard enables dynamic exploration of sales trends, customer demographics, regional performance, and sales channels while demonstrating data cleaning, visualization, and dashboard design skills..</p>
+      <div class="pill-row">
+        <span class="pill">Microsoft Excel</span>
+        <span class="pill">Pivot Tables</span>
+        <span class="pill">Pivot Charts</span>
+        <span class="pill">Slicers</span>
+        <span class="pill">Data Cleaning</span>
+        <span class="pill">Dashboard Design</span>
+              </div>
+    </div>
+  </section>
+
+  <!-- SQL PRACTICE TRACKER -->
+  <section id="practice" class="divider-top">
+    <div class="sec-head">
+      <div class="eyebrow cm">-- SELECT COUNT(*) FROM problems_solved GROUP BY platform</div>
+      <h2>SQL practice tracker</h2>
+    </div>
+
+    <div class="tracker-panel">
+      <div class="tracker-head">
+        <div class="tracker-total">
+          <div class="num" id="totalCount">0</div>
+          <div class="lbl">TOTAL PROBLEMS SOLVED · LIVE</div>
+        </div>
+        <div>
+          <button class="tracker-edit-btn" id="editBtn">Edit counts</button>
+          <span class="save-toast" id="saveToast">saved ✓</span>
+        </div>
+      </div>
+
+      <div class="platform-grid" id="platformGrid"><!-- populated by JS --></div>
+
+      <div class="tracker-note">
+        Numbers are entered manually since LeetCode, DataLemur, HackerRank and StrataScratch don't
+        offer a public API for solved counts
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="divider-top">
+    <div class="sec-head">
+      <div class="eyebrow cm">-- SELECT * FROM education</div>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-row">
+      <div>
+        <h3>B.Tech. in Mechanical Engineering</h3>
+        <div class="sub">Motilal Nehru National Institute of Technology, Allahabad · CGPA 7.49 (74.9%)</div>
+      </div>
+      <div class="when">2023 – 2027</div>
+    </div>
+    <div class="edu-row">
+      <div>
+        <h3>Senior Secondary (Class XII), CBSE — 89.2%</h3>
+        <div class="sub">Kendriya Vidyalaya IIT, Kanpur</div>
+      </div>
+      <div class="when">2022</div>
+    </div>
+    <div class="edu-row">
+      <div>
+        <h3>Junior Secondary (Class X), CBSE — 93.8%</h3>
+        <div class="sub">Kendriya Vidyalaya IIT, Kanpur</div>
+      </div>
+      <div class="when">2020</div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP & ACHIEVEMENTS -->
+  <section class="divider-top">
+    <div class="sec-head">
+      <div class="eyebrow cm">-- SELECT * FROM leadership, achievements</div>
+      <h2>Beyond the classroom</h2>
+    </div>
+    <div class="edu-row">
+      <div>
+        <h3>Networking Lead, Co-Coordinator &amp; Team Member</h3>
+        <div class="sub">TEDxMNNIT 2025, Renaissance 2025, Culrav &amp; E-Cell MNNIT — led speaker outreach and
+        professional networking for 100+ attendee events, managed crowd coordination for the annual
+        cultural festival, and drove partnership outreach for entrepreneurship initiatives.</div>
+      </div>
+      <div class="when">2025</div>
+    </div>
+    <div class="edu-row">
+      <div>
+        <h3>Top 100 — HackHazards25</h3>
+        <div class="sub">Secured a top 100 position among 2,900+ teams and 5,700+ solo hackers as part of the
+        frontend development team for an AI-powered dataset generation platform.</div>
+      </div>
+      <div class="when">Feb 2025</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer id="contact">
+    <span class="cm mono">-- let's connect</span>
+    <div class="foot-links">
+      <a href="mailto:akshita.singh1965@email.com">akshita.singh1965@email.com</a>
+      <a href="https://www.linkedin.com/in/akshita-singh2808/">LinkedIn</a>
+      <a href="https://github.com/akshita-singh-2808">GitHub</a>
+      <a href="https://drive.google.com/file/d/1ZVyDt_XdLDtzDbiqy0qOFR7NbI_BCMlc/view?usp=sharing">Resume</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var PLATFORMS = [
+    {key:'leetcode',   name:'LeetCode',      color:'#F2B84B'},
+    {key:'datalemur',  name:'DataLemur',     color:'#4FD1C5'},
+    {key:'hackerrank', name:'HackerRank',    color:'#8FD14F'},
+    {key:'stratascratch', name:'StrataScratch', color:'#F2617A'}
+  ];
+  var DEFAULTS = {leetcode:0, datalemur:0, hackerrank:0, stratascratch:0};
+  var editing = false;
+  var data = Object.assign({}, DEFAULTS);
+
+  function hasClaudeStorage(){ return typeof window.storage !== 'undefined' && window.storage; }
+
+  async function loadData(){
+    try{
+      if(hasClaudeStorage()){
+        var res = await window.storage.get('sql_practice_counts', false);
+        if(res && res.value){ data = Object.assign({}, DEFAULTS, JSON.parse(res.value)); }
+      } else {
+        var raw = localStorage.getItem('sql_practice_counts');
+        if(raw){ data = Object.assign({}, DEFAULTS, JSON.parse(raw)); }
+      }
+    }catch(e){ /* no saved data yet — use defaults */ }
+    render();
+  }
+
+  async function saveData(){
+    try{
+      if(hasClaudeStorage()){
+        await window.storage.set('sql_practice_counts', JSON.stringify(data), false);
+      } else {
+        localStorage.setItem('sql_practice_counts', JSON.stringify(data));
+      }
+      var toast = document.getElementById('saveToast');
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 1200);
+    }catch(e){ console.error('Could not save practice counts', e); }
+  }
+
+  function total(){
+    return PLATFORMS.reduce(function(sum,p){ return sum + (parseInt(data[p.key],10) || 0); }, 0);
+  }
+
+  function render(){
+    document.getElementById('totalCount').textContent = total();
+    var grid = document.getElementById('platformGrid');
+    grid.innerHTML = '';
+    var max = Math.max(50, total()); // simple visual scale so bars feel proportional
+    PLATFORMS.forEach(function(p){
+      var count = parseInt(data[p.key],10) || 0;
+      var card = document.createElement('div');
+      card.className = 'platform-card';
+      var pct = Math.min(100, Math.round((count / (max || 1)) * 100));
+      if(editing){
+        card.innerHTML =
+          '<div class="p-top"><span class="p-name">' + p.name + '</span></div>' +
+          '<input type="number" min="0" data-key="' + p.key + '" value="' + count + '">';
+      } else {
+        card.innerHTML =
+          '<div class="p-top"><span class="p-name">' + p.name + '</span><span class="p-count">' + count + '</span></div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%; background:' + p.color + '"></div></div>';
+      }
+      grid.appendChild(card);
+    });
+
+    if(editing){
+      grid.querySelectorAll('input').forEach(function(inp){
+        inp.addEventListener('input', function(){
+          data[inp.dataset.key] = parseInt(inp.value,10) || 0;
+          document.getElementById('totalCount').textContent = total();
+        });
+      });
+    }
+  }
+
+  document.getElementById('editBtn').addEventListener('click', function(){
+    if(editing){
+      editing = false;
+      this.textContent = 'Edit counts';
+      saveData();
+      render();
+    } else {
+      editing = true;
+      this.textContent = 'Save counts';
+      render();
+    }
+  });
+
+  loadData();
+})();
+</script>
+
+</body>
+</html>
