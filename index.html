@@ -1,23 +1,21 @@
+
+
+Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akshita Singh — Data Scientist| Data Analyst | Buisness Analyst Portfolio</title>
+<title>Akshita Singh — Data Scientist | Data Analyst | Business Analyst Portfolio</title>
 <!--
   HOW TO EDIT THIS FILE
   ----------------------
-  1. This is now filled in with Akshita Singh's real info from her resume
-     (education, projects, skills, achievements, contact links). Only one
-     placeholder is left: [Link to your resume PDF once hosted online] in two
-     spots (hero button + footer) — once you upload your resume PDF somewhere
-     public (e.g. GitHub, Google Drive with link sharing on), paste that URL in.
-  2. The SQL PRACTICE TRACKER near the "sql_practice" section is a real working
-     widget — click "Edit counts" to type in your current solved counts from
-     LeetCode, DataLemur, HackerRank and StrataScratch. It saves automatically
-     in the browser so the numbers persist next time this browser opens the page.
-  3. Host this file for free on GitHub Pages, Netlify, or Vercel — just upload it
-     as index.html.
+  1. Filled in with Akshita Singh's real info from her resume (education,
+     projects, skills, achievements, contact links). Only one placeholder is
+     left: the resume link in two spots (hero button + footer) — swap in your
+     hosted resume URL if it changes.
+  2. Host this file for free on GitHub Pages, Netlify, or Vercel — just upload
+     it as index.html.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -42,6 +40,8 @@
     font-family:'Inter', sans-serif;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    position:relative;
+    overflow-x:hidden;
   }
   ::selection{background:var(--amber); color:#0B0F17;}
   .mono{font-family:'JetBrains Mono', monospace;}
@@ -52,9 +52,30 @@
   a{color:var(--teal); text-decoration:none;}
   a:hover{text-decoration:underline;}
   a:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
-
-  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
-
+ 
+  /* AMBIENT BACKDROP */
+  .bg-grid{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(38,50,74,0.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38,50,74,0.35) 1px, transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 10%, transparent 75%);
+  }
+  .bg-orb{
+    position:fixed; z-index:0; pointer-events:none; border-radius:50%;
+    filter:blur(90px); opacity:0.16;
+  }
+  .bg-orb.amber{ width:520px; height:520px; background:var(--amber); top:-140px; left:-140px; animation:drift1 22s ease-in-out infinite; }
+  .bg-orb.teal{ width:480px; height:480px; background:var(--teal); bottom:-160px; right:-120px; animation:drift2 26s ease-in-out infinite; }
+  @keyframes drift1{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(60px,40px);} }
+  @keyframes drift2{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-30px);} }
+  @media (prefers-reduced-motion:reduce){
+    .bg-orb{animation:none !important;}
+  }
+ 
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+ 
   /* NAV */
   header.nav{
     position:sticky; top:0; z-index:50;
@@ -69,10 +90,15 @@
   .logo{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:17px;}
   .logo span{color:var(--amber);}
   nav.links{display:flex; gap:22px; font-family:'JetBrains Mono', monospace; font-size:13px;}
-  nav.links a{color:var(--muted);}
+  nav.links a{color:var(--muted); position:relative; padding-bottom:2px;}
+  nav.links a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px;
+    background:var(--teal); transform:scaleX(0); transform-origin:left; transition:transform .2s ease;
+  }
   nav.links a:hover{color:var(--text); text-decoration:none;}
+  nav.links a:hover::after{transform:scaleX(1);}
   .nav-toggle{display:none; background:none; border:1px solid var(--border); color:var(--text); border-radius:8px; padding:6px 10px; font-family:'JetBrains Mono',monospace; font-size:12px;}
-
+ 
   /* HERO */
   .hero{padding:88px 0 64px;}
   .eyebrow{
@@ -82,15 +108,17 @@
   .query-block{
     background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
     padding:22px 24px; font-family:'JetBrains Mono', monospace; font-size:14px;
-    overflow-x:auto; box-shadow:0 20px 50px -30px rgba(0,0,0,0.7);
+    overflow-x:auto; box-shadow:0 20px 50px -30px rgba(0,0,0,0.7), 0 0 0 1px rgba(79,209,197,0.03);
   }
-  .query-block .line{white-space:pre; }
+  .query-block .line{white-space:pre; min-height:1.2em;}
   .cursor{display:inline-block; width:8px; height:16px; background:var(--amber); vertical-align:-2px; animation:blink 1s steps(1) infinite;}
   @keyframes blink{50%{opacity:0;}}
-
+ 
   .result-table{
     margin-top:18px; width:100%; border-collapse:collapse; font-size:13px;
+    opacity:0; animation:tableIn .5s ease forwards; animation-delay:1.9s;
   }
+  @keyframes tableIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
   .result-table th{
     text-align:left; font-family:'JetBrains Mono', monospace; font-weight:500;
     color:var(--muted); padding:8px 12px; border-bottom:1px solid var(--border);
@@ -98,95 +126,73 @@
   }
   .result-table td{padding:12px; border-bottom:1px solid var(--border); vertical-align:top;}
   .result-table tr:last-child td{border-bottom:none;}
-
+ 
   .hero-name{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:20px;}
   .hero-role{color:var(--teal); font-size:13px; font-family:'JetBrains Mono',monospace;}
   .hero-tag{color:var(--muted); font-size:13.5px; max-width:360px;}
-
+ 
   .hero-links{margin-top:22px; display:flex; gap:14px; flex-wrap:wrap;}
   .btn{
     font-family:'JetBrains Mono', monospace; font-size:12.5px; padding:9px 16px;
     border-radius:8px; border:1px solid var(--border); color:var(--text);
-    display:inline-flex; align-items:center; gap:6px; transition:border-color .15s, transform .15s;
+    display:inline-flex; align-items:center; gap:6px; transition:border-color .15s, transform .15s, box-shadow .15s;
   }
-  .btn:hover{border-color:var(--teal); text-decoration:none; transform:translateY(-1px);}
+  .btn:hover{border-color:var(--teal); text-decoration:none; transform:translateY(-2px); box-shadow:0 8px 20px -8px rgba(79,209,197,0.35);}
   .btn.primary{background:var(--amber); color:#0B0F17; border-color:var(--amber); font-weight:600;}
-  .btn.primary:hover{border-color:var(--amber); opacity:0.92;}
-
+  .btn.primary:hover{border-color:var(--amber); box-shadow:0 8px 20px -8px rgba(242,184,75,0.5); opacity:0.96;}
+ 
   /* SECTION SHELL */
   section{padding:56px 0;}
   section.divider-top{border-top:1px solid var(--border);}
   .sec-head{margin-bottom:30px;}
   .sec-head .eyebrow{margin-bottom:8px;}
   .sec-head h2{font-family:'Space Grotesk', sans-serif; font-size:24px; font-weight:600;}
-
+ 
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.is-visible{opacity:1; transform:translateY(0);}
+ 
   /* SKILLS */
   .skill-groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
-  .skill-card{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px;}
+  .skill-card{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; transition:border-color .2s ease, transform .2s ease;}
+  .skill-card:hover{border-color:rgba(79,209,197,0.4); transform:translateY(-2px);}
   .skill-card h3{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--amber); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:12px;}
   .pill-row{display:flex; flex-wrap:wrap; gap:8px;}
   .pill{
     font-family:'JetBrains Mono', monospace; font-size:12px; padding:5px 10px;
     background:var(--panel-alt); border:1px solid var(--border); border-radius:6px; color:var(--text);
+    display:inline-flex; align-items:center; gap:6px; transition:border-color .15s ease, transform .15s ease;
   }
-
+  .pill:hover{border-color:var(--teal); transform:translateY(-1px);}
+  .pill.pill-adv{border-color:rgba(242,184,75,0.55); background:linear-gradient(135deg, rgba(242,184,75,0.08), rgba(79,209,197,0.05));}
+  .pill-badge{
+    font-size:9.5px; letter-spacing:0.06em; padding:2px 6px; border-radius:4px;
+    background:var(--amber); color:#0B0F17; font-weight:700;
+  }
+ 
   /* PROJECTS */
   .project{
     background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
-    padding:22px 24px; margin-bottom:18px;
+    padding:22px 24px; margin-bottom:18px; transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
   }
+  .project:hover{border-color:rgba(79,209,197,0.35); transform:translateY(-3px); box-shadow:0 16px 40px -28px rgba(79,209,197,0.4);}
   .project-top{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:8px;}
   .project h3{font-family:'Space Grotesk', sans-serif; font-size:17px; font-weight:600;}
   .project .plinks{font-family:'JetBrains Mono', monospace; font-size:12px; display:flex; gap:14px;}
   .project p{color:var(--muted); font-size:14px; margin-bottom:12px;}
   .project .pill-row{margin-top:4px;}
-
-  /* TRACKER */
-  .tracker-panel{
-    background:linear-gradient(165deg, var(--panel), var(--panel-alt));
-    border:1px solid var(--border); border-radius:var(--radius); padding:26px 26px 22px;
-  }
-  .tracker-head{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:22px;}
-  .tracker-total{font-family:'Space Grotesk', sans-serif;}
-  .tracker-total .num{font-size:40px; font-weight:700; color:var(--amber); line-height:1;}
-  .tracker-total .lbl{font-size:12px; color:var(--muted); font-family:'JetBrains Mono', monospace; margin-top:4px;}
-  .tracker-edit-btn{
-    font-family:'JetBrains Mono', monospace; font-size:12px; padding:8px 14px;
-    border-radius:8px; border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer;
-  }
-  .tracker-edit-btn:hover{border-color:var(--teal);}
-  .platform-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
-  .platform-card{
-    background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:8px; padding:14px 16px;
-  }
-  .platform-card .p-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
-  .platform-card .p-name{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--muted);}
-  .platform-card .p-count{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px;}
-  .platform-card input{
-    width:100%; background:var(--panel-alt); border:1px solid var(--border); border-radius:6px;
-    color:var(--text); font-family:'JetBrains Mono', monospace; font-size:16px; padding:8px 10px;
-  }
-  .bar-track{height:6px; background:var(--panel-alt); border-radius:4px; overflow:hidden; margin-top:10px;}
-  .bar-fill{height:100%; background:var(--teal); border-radius:4px; transition:width .4s ease;}
-  .tracker-note{margin-top:18px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono', monospace;}
-  .save-toast{
-    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--teal);
-    opacity:0; transition:opacity .3s; margin-left:10px;
-  }
-  .save-toast.show{opacity:1;}
-
+ 
   /* EDUCATION */
   .edu-row{display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-bottom:1px solid var(--border); flex-wrap:wrap;}
   .edu-row:last-child{border-bottom:none;}
   .edu-row h3{font-family:'Space Grotesk', sans-serif; font-size:15.5px; font-weight:600;}
   .edu-row .sub{color:var(--muted); font-size:13px;}
   .edu-row .when{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--teal); white-space:nowrap;}
-
+ 
   /* FOOTER */
   footer{padding:50px 0 70px; text-align:center;}
   footer .cm{display:block; margin-bottom:14px;}
   footer .foot-links{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; font-family:'JetBrains Mono', monospace; font-size:13px;}
-
+ 
   @media (max-width:640px){
     nav.links{display:none;}
     .nav-toggle{display:inline-block;}
@@ -196,7 +202,11 @@
 </style>
 </head>
 <body>
-
+ 
+<div class="bg-grid"></div>
+<div class="bg-orb amber"></div>
+<div class="bg-orb teal"></div>
+ 
 <header class="nav">
   <div class="nav-inner">
     <div class="logo">Akshita<span>.</span>sql</div>
@@ -204,19 +214,18 @@
       <a href="#about">about</a>
       <a href="#skills">skills</a>
       <a href="#projects">projects</a>
-      <a href="#practice">sql_practice</a>
       <a href="#education">education</a>
       <a href="#contact">contact</a>
     </nav>
   </div>
 </header>
-
+ 
 <main class="wrap">
-
+ 
   <!-- HERO -->
   <section class="hero">
     <div class="query-block">
-      <div class="line"><span class="kw">SELECT</span> * <span class="kw">FROM</span> <span class="fn">candidates</span> <span class="kw">WHERE</span> role <span class="kw">IN</span> (<span class="str">'Data Analyst'</span>, <span class="str">'Data Scientist'</span>, <span class="str">'Business Analyst'</span>) <span class="kw">AND</span> name = <span class="str">'Akshita Singh'</span>;<span class="cursor"></span></div>
+      <div class="line mono" id="typedLine"><span class="cursor"></span></div>
       <table class="result-table">
         <thead>
           <tr><th>name</th><th>role</th><th>summary</th><th>status</th></tr>
@@ -238,21 +247,20 @@
       <a class="btn" href="https://drive.google.com/file/d/1ZVyDt_XdLDtzDbiqy0qOFR7NbI_BCMlc/view?usp=sharing">Resume ↓</a>
     </div>
   </section>
-
+ 
   <!-- ABOUT -->
-  <section id="about" class="divider-top">
+  <section id="about" class="divider-top reveal">
     <div class="sec-head">
       <div class="eyebrow cm">-- about</div>
       <h2>Who I am</h2>
     </div>
     <p style="max-width:640px; color:var(--muted); font-size:15px;">
       Data is only valuable when it leads to better decisions. I enjoy exploring data, developing predictive models, and creating analytical solutions that bridge technical methods with business objectives. I'm currently building expertise in machine learning, deep learning, and business analytics while working on projects that demonstrate practical impact.
-
     </p>
   </section>
-
+ 
   <!-- SKILLS -->
-  <section id="skills" class="divider-top">
+  <section id="skills" class="divider-top reveal">
     <div class="sec-head">
       <div class="eyebrow cm">-- SELECT * FROM skills</div>
       <h2>What I work with</h2>
@@ -262,7 +270,8 @@
         <h3>Languages</h3>
         <div class="pill-row">
           <span class="pill">Python</span>
-          <span class="pill">SQL</span>
+          <span class="pill pill-adv">SQL <span class="pill-badge">PROFICIENT</span></span>
+          <span class="pill pill-adv">Advanced SQL <span class="pill-badge">ADV</span></span>
           <span class="pill">C++</span>
         </div>
       </div>
@@ -292,19 +301,19 @@
           <span class="pill">Tableau</span>
           <span class="pill">Excel</span>
           <span class="pill">Matplotlib / Seaborn</span>
-          <span class="pill">Streamlit / Seaborn</span>
+          <span class="pill">Streamlit</span>
         </div>
       </div>
     </div>
   </section>
-
+ 
   <!-- PROJECTS -->
-  <section id="projects" class="divider-top">
+  <section id="projects" class="divider-top reveal">
     <div class="sec-head">
       <div class="eyebrow cm">-- SELECT * FROM projects ORDER BY relevance DESC</div>
       <h2>Projects</h2>
     </div>
-
+ 
     <div class="project">
       <div class="project-top">
         <h3>Rossmann Store Sales Forecasting — LSTM &amp; XGBoost</h3>
@@ -324,8 +333,8 @@
     <div class="project">
       <div class="project-top">
         <h3>Airline Loyalty Churn Prediction &amp; Retention Intelligence</h3>
-        <div class="plinks"><a href="https://github.com/akshita-singh-2808/airlines_churn_prediction">code</a>
-          <a href="https://airlines-churn-prediction-model.streamlit.app/">live</a>
+        <div class="plinks"><a href="https://github.com/akshita-singh-2808/airlines_churn_prediction_prev">code</a>
+          <a href="https://airlineschurnprediction.streamlit.app/">live</a>
         </div>
       </div>
       <p>Built an XGBoost-based churn prediction and segmentation system on airline loyalty data
@@ -361,40 +370,12 @@
         <span class="pill">Slicers</span>
         <span class="pill">Data Cleaning</span>
         <span class="pill">Dashboard Design</span>
-              </div>
-    </div>
-  </section>
-
-  <!-- SQL PRACTICE TRACKER -->
-  <section id="practice" class="divider-top">
-    <div class="sec-head">
-      <div class="eyebrow cm">-- SELECT COUNT(*) FROM problems_solved GROUP BY platform</div>
-      <h2>SQL practice tracker</h2>
-    </div>
-
-    <div class="tracker-panel">
-      <div class="tracker-head">
-        <div class="tracker-total">
-          <div class="num" id="totalCount">0</div>
-          <div class="lbl">TOTAL PROBLEMS SOLVED · LIVE</div>
-        </div>
-        <div>
-          <button class="tracker-edit-btn" id="editBtn">Edit counts</button>
-          <span class="save-toast" id="saveToast">saved ✓</span>
-        </div>
-      </div>
-
-      <div class="platform-grid" id="platformGrid"><!-- populated by JS --></div>
-
-      <div class="tracker-note">
-        Numbers are entered manually since LeetCode, DataLemur, HackerRank and StrataScratch don't
-        offer a public API for solved counts
       </div>
     </div>
   </section>
-
+ 
   <!-- EDUCATION -->
-  <section id="education" class="divider-top">
+  <section id="education" class="divider-top reveal">
     <div class="sec-head">
       <div class="eyebrow cm">-- SELECT * FROM education</div>
       <h2>Education</h2>
@@ -421,9 +402,9 @@
       <div class="when">2020</div>
     </div>
   </section>
-
+ 
   <!-- LEADERSHIP & ACHIEVEMENTS -->
-  <section class="divider-top">
+  <section class="divider-top reveal">
     <div class="sec-head">
       <div class="eyebrow cm">-- SELECT * FROM leadership, achievements</div>
       <h2>Beyond the classroom</h2>
@@ -446,7 +427,7 @@
       <div class="when">Feb 2025</div>
     </div>
   </section>
-
+ 
   <!-- CONTACT -->
   <footer id="contact">
     <span class="cm mono">-- let's connect</span>
@@ -457,101 +438,62 @@
       <a href="https://drive.google.com/file/d/1ZVyDt_XdLDtzDbiqy0qOFR7NbI_BCMlc/view?usp=sharing">Resume</a>
     </div>
   </footer>
-
+ 
 </main>
-
+ 
 <script>
-(function(){
-  var PLATFORMS = [
-    {key:'leetcode',   name:'LeetCode',      color:'#F2B84B'},
-    {key:'datalemur',  name:'DataLemur',     color:'#4FD1C5'},
-    {key:'hackerrank', name:'HackerRank',    color:'#8FD14F'},
-    {key:'stratascratch', name:'StrataScratch', color:'#F2617A'}
-  ];
-  var DEFAULTS = {leetcode:0, datalemur:0, hackerrank:0, stratascratch:0};
-  var editing = false;
-  var data = Object.assign({}, DEFAULTS);
-
-  function hasClaudeStorage(){ return typeof window.storage !== 'undefined' && window.storage; }
-
-  async function loadData(){
-    try{
-      if(hasClaudeStorage()){
-        var res = await window.storage.get('sql_practice_counts', false);
-        if(res && res.value){ data = Object.assign({}, DEFAULTS, JSON.parse(res.value)); }
-      } else {
-        var raw = localStorage.getItem('sql_practice_counts');
-        if(raw){ data = Object.assign({}, DEFAULTS, JSON.parse(raw)); }
-      }
-    }catch(e){ /* no saved data yet — use defaults */ }
-    render();
-  }
-
-  async function saveData(){
-    try{
-      if(hasClaudeStorage()){
-        await window.storage.set('sql_practice_counts', JSON.stringify(data), false);
-      } else {
-        localStorage.setItem('sql_practice_counts', JSON.stringify(data));
-      }
-      var toast = document.getElementById('saveToast');
-      toast.classList.add('show');
-      setTimeout(function(){ toast.classList.remove('show'); }, 1200);
-    }catch(e){ console.error('Could not save practice counts', e); }
-  }
-
-  function total(){
-    return PLATFORMS.reduce(function(sum,p){ return sum + (parseInt(data[p.key],10) || 0); }, 0);
-  }
-
-  function render(){
-    document.getElementById('totalCount').textContent = total();
-    var grid = document.getElementById('platformGrid');
-    grid.innerHTML = '';
-    var max = Math.max(50, total()); // simple visual scale so bars feel proportional
-    PLATFORMS.forEach(function(p){
-      var count = parseInt(data[p.key],10) || 0;
-      var card = document.createElement('div');
-      card.className = 'platform-card';
-      var pct = Math.min(100, Math.round((count / (max || 1)) * 100));
-      if(editing){
-        card.innerHTML =
-          '<div class="p-top"><span class="p-name">' + p.name + '</span></div>' +
-          '<input type="number" min="0" data-key="' + p.key + '" value="' + count + '">';
-      } else {
-        card.innerHTML =
-          '<div class="p-top"><span class="p-name">' + p.name + '</span><span class="p-count">' + count + '</span></div>' +
-          '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%; background:' + p.color + '"></div></div>';
-      }
-      grid.appendChild(card);
-    });
-
-    if(editing){
-      grid.querySelectorAll('input').forEach(function(inp){
-        inp.addEventListener('input', function(){
-          data[inp.dataset.key] = parseInt(inp.value,10) || 0;
-          document.getElementById('totalCount').textContent = total();
-        });
+  // Hero query type-writer effect
+  (function(){
+    var el = document.getElementById('typedLine');
+    var prefix = 'SELECT * FROM candidates WHERE role IN (\'Data Analyst\', \'Data Scientist\', \'Business Analyst\') AND name = \'Akshita Singh\';';
+    var kwWords = ['SELECT','FROM','WHERE','IN','AND'];
+    function highlight(str){
+      var out = str
+        .replace(/candidates/g, '<span class="fn">candidates</span>')
+        .replace(/'Data Analyst'/g, '<span class="str">\'Data Analyst\'</span>')
+        .replace(/'Data Scientist'/g, '<span class="str">\'Data Scientist\'</span>')
+        .replace(/'Business Analyst'/g, '<span class="str">\'Business Analyst\'</span>')
+        .replace(/'Akshita Singh'/g, '<span class="str">\'Akshita Singh\'</span>');
+      kwWords.forEach(function(k){
+        out = out.replace(new RegExp('\\b'+k+'\\b','g'), '<span class="kw">'+k+'</span>');
       });
+      return out;
     }
-  }
-
-  document.getElementById('editBtn').addEventListener('click', function(){
-    if(editing){
-      editing = false;
-      this.textContent = 'Edit counts';
-      saveData();
-      render();
+    var i = 0;
+    var speed = 14;
+    function tick(){
+      if(i <= prefix.length){
+        el.innerHTML = highlight(prefix.slice(0, i)) + '<span class="cursor"></span>';
+        i++;
+        setTimeout(tick, speed);
+      }
+    }
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      el.innerHTML = highlight(prefix) + '<span class="cursor"></span>';
     } else {
-      editing = true;
-      this.textContent = 'Save counts';
-      render();
+      tick();
     }
-  });
-
-  loadData();
-})();
+  })();
+ 
+  // Scroll reveal
+  (function(){
+    var items = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(it){ it.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    items.forEach(function(it){ io.observe(it); });
+  })();
 </script>
-
+ 
 </body>
 </html>
+ 
