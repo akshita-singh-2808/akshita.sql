@@ -293,14 +293,16 @@
           <a href="https://airlineschurnprediction.streamlit.app/">live</a>
         </div>
       </div>
-      <p>Built an XGBoost-based churn prediction and segmentation system on airline loyalty data
-      covering 16,737 customer records. Engineered features from recency, flight frequency,
-      redemption ratio and seasonal engagement trends, achieving <strong>97% classification
-      accuracy</strong> and a <strong>0.97 ROC-AUC</strong> on imbalanced data through threshold
-      tuning. Added KMeans clustering for customer segmentation and shipped an interactive
-      Streamlit dashboard for churn analysis and retention strategy reporting.</p>
+      <p>Compared 5 models (Logistic Regression, Decision Tree, Random Forest, XGBoost, and
+      BalancedRandomForestClassifier) via Optuna tuning on 16,737 airline loyalty records with
+      a 14.5:1 class imbalance. Selected the winner by PR-AUC — not accuracy, which is
+      uninformative at this imbalance — landing on <strong>BalancedRandomForestClassifier</strong>
+      with <strong>0.75 ROC-AUC</strong>, more than doubling churner recall vs. the baseline
+      (54% vs. 30%) through threshold tuning. Added KMeans clustering (k=4) for behavioral
+      customer segmentation and shipped an interactive Streamlit dashboard for churn analysis
+      and retention strategy reporting.</p>
       <div class="pill-row">
-        <span class="pill">Python</span><span class="pill">XGBoost</span><span class="pill">KMeans</span><span class="pill">Streamlit</span>
+        <span class="pill">Python</span><span class="pill">Optuna</span><span class="pill">BalancedRandomForest</span><span class="pill">KMeans</span><span class="pill">Streamlit</span>
       </div>
     </div>
     <div class="project">
