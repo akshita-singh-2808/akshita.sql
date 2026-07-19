@@ -141,40 +141,6 @@
   .project p{color:var(--muted); font-size:14px; margin-bottom:12px;}
   .project .pill-row{margin-top:4px;}
 
-  /* TRACKER */
-  .tracker-panel{
-    background:linear-gradient(165deg, var(--panel), var(--panel-alt));
-    border:1px solid var(--border); border-radius:var(--radius); padding:26px 26px 22px;
-  }
-  .tracker-head{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:22px;}
-  .tracker-total{font-family:'Space Grotesk', sans-serif;}
-  .tracker-total .num{font-size:40px; font-weight:700; color:var(--amber); line-height:1;}
-  .tracker-total .lbl{font-size:12px; color:var(--muted); font-family:'JetBrains Mono', monospace; margin-top:4px;}
-  .tracker-edit-btn{
-    font-family:'JetBrains Mono', monospace; font-size:12px; padding:8px 14px;
-    border-radius:8px; border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer;
-  }
-  .tracker-edit-btn:hover{border-color:var(--teal);}
-  .platform-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
-  .platform-card{
-    background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:8px; padding:14px 16px;
-  }
-  .platform-card .p-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
-  .platform-card .p-name{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--muted);}
-  .platform-card .p-count{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px;}
-  .platform-card input{
-    width:100%; background:var(--panel-alt); border:1px solid var(--border); border-radius:6px;
-    color:var(--text); font-family:'JetBrains Mono', monospace; font-size:16px; padding:8px 10px;
-  }
-  .bar-track{height:6px; background:var(--panel-alt); border-radius:4px; overflow:hidden; margin-top:10px;}
-  .bar-fill{height:100%; background:var(--teal); border-radius:4px; transition:width .4s ease;}
-  .tracker-note{margin-top:18px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono', monospace;}
-  .save-toast{
-    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--teal);
-    opacity:0; transition:opacity .3s; margin-left:10px;
-  }
-  .save-toast.show{opacity:1;}
-
   /* EDUCATION */
   .edu-row{display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-bottom:1px solid var(--border); flex-wrap:wrap;}
   .edu-row:last-child{border-bottom:none;}
@@ -204,7 +170,6 @@
       <a href="#about">about</a>
       <a href="#skills">skills</a>
       <a href="#projects">projects</a>
-      <a href="#practice">sql_practice</a>
       <a href="#education">education</a>
       <a href="#contact">contact</a>
     </nav>
@@ -348,7 +313,17 @@
         <span class="pill">Python</span><span class="pill">PCA</span><span class="pill">StandardScaler</span><span class="pill">KMeans</span><span class="pill">Streamlit</span>
       </div>
     </div>
-        <div class="project">
+    <div class="project">
+      <div class="project-top">
+        <h3>Bank Loan Analytics Dashboard (Power BI)</h3>
+        <div class="plinks"><a href="https://github.com/akshita-singh-2808/Bank-Loan-Analytics/tree/main">code</a></div>
+      </div>
+      <p>Built an interactive Power BI dashboard analyzing 38.6K bank loan applications worth $435.8M in funded amount. Tracked funding, repayment, interest rate and DTI trends across Summary, Overview, and Details pages, with a good vs. bad loan classification (86.2% good loans) to support credit risk and underwriting decisions.</p>
+      <div class="pill-row">
+        <span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">Data Modeling</span>
+      </div>
+    </div>
+    <div class="project">
       <div class="project-top">
         <h3>Retail Sales Dashboard (Microsoft Excel)</h3>
         <div class="plinks"><a href="https://github.com/akshita-singh-2808/vistara_store_sales_analysis">code</a><a href="https://1drv.ms/x/c/ca8f799fd862bf37/IQDljFyC8ykfQKjq-weMdUTMAY12SoDhK0eKVlhXZzMtddA?e=agoMtB">live</a></div>
@@ -364,34 +339,6 @@
               </div>
     </div>
   </section>
-<!-- 
-  <!-- SQL PRACTICE TRACKER -->
-  <section id="practice" class="divider-top">
-    <div class="sec-head">
-      <div class="eyebrow cm">-- SELECT COUNT(*) FROM problems_solved GROUP BY platform</div>
-      <h2>SQL practice tracker</h2>
-    </div>
-
-    <div class="tracker-panel">
-      <div class="tracker-head">
-        <div class="tracker-total">
-          <div class="num" id="totalCount">0</div>
-          <div class="lbl">TOTAL PROBLEMS SOLVED · LIVE</div>
-        </div>
-        <div>
-          <button class="tracker-edit-btn" id="editBtn">Edit counts</button>
-          <span class="save-toast" id="saveToast">saved ✓</span>
-        </div>
-      </div>
-
-      <div class="platform-grid" id="platformGrid"><!-- populated by JS --></div>
-
-      <div class="tracker-note">
-        Numbers are entered manually since LeetCode, DataLemur, HackerRank and StrataScratch don't
-        offer a public API for solved counts
-      </div>
-    </div>
-  </section> -->
 
   <!-- EDUCATION -->
   <section id="education" class="divider-top">
@@ -459,99 +406,6 @@
   </footer>
 
 </main>
-
-<script>
-(function(){
-  var PLATFORMS = [
-    {key:'leetcode',   name:'LeetCode',      color:'#F2B84B'},
-    {key:'datalemur',  name:'DataLemur',     color:'#4FD1C5'},
-    {key:'hackerrank', name:'HackerRank',    color:'#8FD14F'},
-    {key:'stratascratch', name:'StrataScratch', color:'#F2617A'}
-  ];
-  var DEFAULTS = {leetcode:0, datalemur:0, hackerrank:0, stratascratch:0};
-  var editing = false;
-  var data = Object.assign({}, DEFAULTS);
-
-  function hasClaudeStorage(){ return typeof window.storage !== 'undefined' && window.storage; }
-
-  async function loadData(){
-    try{
-      if(hasClaudeStorage()){
-        var res = await window.storage.get('sql_practice_counts', false);
-        if(res && res.value){ data = Object.assign({}, DEFAULTS, JSON.parse(res.value)); }
-      } else {
-        var raw = localStorage.getItem('sql_practice_counts');
-        if(raw){ data = Object.assign({}, DEFAULTS, JSON.parse(raw)); }
-      }
-    }catch(e){ /* no saved data yet — use defaults */ }
-    render();
-  }
-
-  async function saveData(){
-    try{
-      if(hasClaudeStorage()){
-        await window.storage.set('sql_practice_counts', JSON.stringify(data), false);
-      } else {
-        localStorage.setItem('sql_practice_counts', JSON.stringify(data));
-      }
-      var toast = document.getElementById('saveToast');
-      toast.classList.add('show');
-      setTimeout(function(){ toast.classList.remove('show'); }, 1200);
-    }catch(e){ console.error('Could not save practice counts', e); }
-  }
-
-  function total(){
-    return PLATFORMS.reduce(function(sum,p){ return sum + (parseInt(data[p.key],10) || 0); }, 0);
-  }
-
-  function render(){
-    document.getElementById('totalCount').textContent = total();
-    var grid = document.getElementById('platformGrid');
-    grid.innerHTML = '';
-    var max = Math.max(50, total()); // simple visual scale so bars feel proportional
-    PLATFORMS.forEach(function(p){
-      var count = parseInt(data[p.key],10) || 0;
-      var card = document.createElement('div');
-      card.className = 'platform-card';
-      var pct = Math.min(100, Math.round((count / (max || 1)) * 100));
-      if(editing){
-        card.innerHTML =
-          '<div class="p-top"><span class="p-name">' + p.name + '</span></div>' +
-          '<input type="number" min="0" data-key="' + p.key + '" value="' + count + '">';
-      } else {
-        card.innerHTML =
-          '<div class="p-top"><span class="p-name">' + p.name + '</span><span class="p-count">' + count + '</span></div>' +
-          '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%; background:' + p.color + '"></div></div>';
-      }
-      grid.appendChild(card);
-    });
-
-    if(editing){
-      grid.querySelectorAll('input').forEach(function(inp){
-        inp.addEventListener('input', function(){
-          data[inp.dataset.key] = parseInt(inp.value,10) || 0;
-          document.getElementById('totalCount').textContent = total();
-        });
-      });
-    }
-  }
-
-  document.getElementById('editBtn').addEventListener('click', function(){
-    if(editing){
-      editing = false;
-      this.textContent = 'Edit counts';
-      saveData();
-      render();
-    } else {
-      editing = true;
-      this.textContent = 'Save counts';
-      render();
-    }
-  });
-
-  loadData();
-})();
-</script>
 
 </body>
 </html>
