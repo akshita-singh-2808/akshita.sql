@@ -115,6 +115,18 @@
     background:var(--panel-alt); border:1px solid var(--border); border-radius:6px; color:var(--text);
   }
 
+  /* PROFILES */
+  .profile-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:18px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px;
+    transition:border-color .15s, transform .15s;
+  }
+  .profile-card:hover{border-color:var(--teal); transform:translateY(-1px);}
+  .profile-card .p-name{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:15px; color:var(--text);}
+  .profile-card .p-handle{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted); margin-top:2px;}
+  .profile-card .p-arrow{font-family:'JetBrains Mono', monospace; color:var(--teal); font-size:14px;}
+  a.profile-card:hover{text-decoration:none;}
+
   /* PROJECTS */
   .project{
     background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
@@ -156,6 +168,7 @@
       <a href="#skills">skills</a>
       <a href="#projects">projects</a>
       <a href="#education">education</a>
+      <a href="#profiles">profiles</a>
       <a href="#contact">contact</a>
     </nav>
   </div>
@@ -381,6 +394,26 @@
     </div>
   </section>
 
+  <!-- PROFILES -->
+  <section id="profiles" class="divider-top">
+    <div class="sec-head">
+      <div class="eyebrow cm">-- SELECT * FROM profiles WHERE platform IS NOT NULL</div>
+      <h2>Find me elsewhere</h2>
+    </div>
+    <div class="skill-groups">
+      <a class="profile-card" href="https://leetcode.com/u/akshitaSingh2803/" target="_blank" rel="noopener">
+        <div>
+          <div class="p-name">LeetCode</div>
+          <div class="p-handle">u/akshitaSingh2803</div>
+        </div>
+        <div class="p-arrow">↗</div>
+                  <div class="p-name">Kaggle</div>
+          <div class="p-handle">u/Akshita2803</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <footer id="contact">
     <span class="cm mono">-- let's connect</span>
@@ -388,6 +421,7 @@
       <a href="mailto:akshita.singh1965@email.com">akshita.singh1965@email.com</a>
       <a href="https://www.linkedin.com/in/akshita-singh2808/">LinkedIn</a>
       <a href="https://github.com/akshita-singh-2808">GitHub</a>
+      <a href="https://leetcode.com/u/akshitaSingh2803/">LeetCode</a>
       <a href="https://drive.google.com/file/d/1DvjiELfP3APUWHyhEgFvje9MCUYGWPyy/view?usp=sharing">Resume</a>
     </div>
   </footer>
